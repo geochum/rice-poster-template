@@ -1,0 +1,234 @@
+%===================================
+% Rice University Beamer Theme
+% Based on Rice University Brand Colors
+%===================================
+% Option: poster — use poster layout (headline, poster footline, poster blocks).
+%          Without this option, use presentation layout (slide footline, title page).
+\ProvidesPackage{beamerthemeRice}
+\newif\ifriceposter
+\DeclareOption{poster}{\ricepostertrue}
+\ProcessOptions\relax
+
+% Color Definitions (shared)
+\definecolor{riceblue}{RGB}{0,32,91}        % #00205B - Primary brand color
+\definecolor{ricegray}{RGB}{124,126,127}    % #7C7E7F - Secondary brand color
+\definecolor{lightgraybg}{RGB}{224,226,230}  % #E0E2E6 - Block backgrounds
+\definecolor{darkgray}{RGB}{68,71,79}       % #44474F - Footer text
+\definecolor{lightbluegray}{RGB}{173,199,220} % #ADC7DC - Accent color
+
+% Optional accent colors
+\definecolor{richblue}{RGB}{0,51,102}
+\definecolor{midnightblue}{RGB}{0,20,40}
+\definecolor{darkbluegray}{RGB}{51,63,77}
+\definecolor{brightblue}{RGB}{0,102,204}
+\definecolor{mediumblue}{RGB}{0,64,128}
+
+% Set color theme
+\usecolortheme{default}
+\setbeamercolor{structure}{fg=riceblue}
+\setbeamercolor{title}{fg=white,bg=riceblue}
+\setbeamercolor{frametitle}{fg=white,bg=riceblue}
+\setbeamercolor{framesubtitle}{fg=riceblue}
+\setbeamercolor{block title}{fg=white,bg=riceblue}
+\setbeamercolor{block body}{fg=black,bg=lightgraybg}
+\setbeamercolor{block title alerted}{fg=white,bg=ricegray}
+\setbeamercolor{block body alerted}{fg=black,bg=lightgraybg}
+\setbeamercolor{block title example}{fg=white,bg=riceblue}
+\setbeamercolor{block body example}{fg=black,bg=lightgraybg}
+\setbeamercolor{normal text}{fg=black}
+\setbeamercolor{alerted text}{fg=ricegray}
+\setbeamercolor{example text}{fg=riceblue}
+
+% Set font theme
+\usefonttheme{default}
+\setbeamerfont{title}{size=\Large,series=\bfseries}
+\setbeamerfont{frametitle}{size=\large,series=\bfseries}
+\setbeamerfont{framesubtitle}{size=\normalsize,series=\mdseries}
+\setbeamerfont{block title}{size=\normalsize,series=\bfseries}
+
+% Set inner theme (bullet points, etc.)
+\useinnertheme{default}
+\setbeamertemplate{blocks}[rounded][shadow=true]
+\setbeamertemplate{items}[circle]
+\setbeamertemplate{sections/subsections in toc}[circle]
+
+% Set outer theme (navigation, footline, etc.)
+\useoutertheme{default}
+\setbeamertemplate{navigation symbols}{} % Remove navigation symbols
+
+%----------------------------------------
+% Presentation-only: footline and title page
+%----------------------------------------
+\ifriceposter\else
+\setbeamertemplate{footline}{
+  \hbox{%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+      \hspace*{1ex}%
+      \usebeamerfont{author in head/foot}\insertshortauthor%
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+      \usebeamerfont{title in head/foot}\insertshorttitle
+    \end{beamercolorbox}%
+    \begin{beamercolorbox}[wd=.25\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+      \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{1em}
+      \insertframenumber{} / \inserttotalframenumber\hspace*{0.5ex}%
+      \includegraphics[height=1.2ex]{figures/logos/rice_logo_blue.png}%
+      \hspace*{1ex}%
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+\setbeamercolor{author in head/foot}{fg=darkgray}
+\setbeamercolor{title in head/foot}{fg=darkgray}
+\setbeamercolor{date in head/foot}{fg=darkgray}
+
+% Title page template (presentations only)
+\setbeamertemplate{title page}{
+  \vbox{}
+  \vfill
+  \begingroup
+    \centering
+    % Rice logo at top
+    \includegraphics[height=1.2cm]{figures/logos/rice_logo_blue.png}
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,center,rounded=true,shadow=true]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \end{beamercolorbox}%
+    \vskip0.8em\par
+    \begin{beamercolorbox}[sep=8pt,center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \vskip0.4em\par
+    \begin{beamercolorbox}[sep=8pt,center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \vskip0.4em\par
+    \begin{beamercolorbox}[sep=8pt,center]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.3em
+  \endgroup
+  \vfill
+}
+
+% Section / subsection page templates (presentations only)
+\setbeamertemplate{section page}{
+  \begin{centering}
+    \begin{beamercolorbox}[sep=12pt,center,rounded=true,shadow=true]{section title}
+      \usebeamerfont{section title}\insertsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+\setbeamertemplate{subsection page}{
+  \begin{centering}
+    \begin{beamercolorbox}[sep=12pt,center,rounded=true,shadow=true]{subsection title}
+      \usebeamerfont{subsection title}\insertsubsection\par
+    \end{beamercolorbox}
+  \end{centering}
+}
+\fi
+
+%----------------------------------------
+% Poster-only: dependencies, headline, footline, blocks
+%----------------------------------------
+\ifriceposter
+\RequirePackage{etoolbox}
+\RequirePackage{ragged2e}
+\makeatletter
+\apptocmd{\@arrayparboxrestore}{\justifying}{}{}
+\makeatother
+
+% Poster palette
+\setbeamercolor{headline}{fg=riceblue,bg=riceblue}
+\setbeamercolor{footline}{fg=darkgray,bg=white}
+\setbeamerfont{footline}{size=\large,series=\tt}
+\setbeamercolor{separation line}{bg=white}
+\setbeamercolor{title in headline}{fg=white}
+\setbeamercolor{author in headline}{fg=white}
+\setbeamercolor{institute in headline}{fg=white}
+\setbeamercolor{author in head/foot}{fg=white,bg=riceblue}
+\setbeamercolor{title in head/foot}{fg=white,bg=riceblue}
+\setbeamercolor{upper separation line head}{fg=riceblue}
+\setbeamercolor{lower separation line head}{bg=white}
+\setbeamercolor{upper separation line foot}{bg=white}
+\setbeamercolor{lower separation line foot}{bg=white}
+\setbeamerfont{block title}{size=\large,series=\bf}
+
+% Poster headline (title/author/institute + logo)
+\setbeamertemplate{headline}{
+  \leavevmode
+  \begin{beamercolorbox}[wd=\paperwidth]{headline}
+    \begin{columns}[T]
+      \begin{column}{.015\paperwidth}
+      \end{column}
+      \begin{column}{.71\paperwidth}
+        \vskip4ex
+        \vspace{20pt}
+        \raggedright
+        \usebeamercolor{title in headline}{\color{fg}\textbf{\LARGE{\inserttitle}}\\[1ex]}
+        \vspace{20pt}
+        \usebeamercolor{author in headline}{\color{fg}\large{\insertauthor}\\[1ex]}
+        \vspace{-5pt}
+        \usebeamercolor{institute in headline}{\color{fg}\large{\insertinstitute}\\[1ex]}
+        \vspace{0pt}
+      \end{column}
+      \begin{column}{.226\paperwidth}
+        \vskip11ex
+        \vspace{-30pt}
+        \begin{center}
+          \hfill
+          \includegraphics[height=10cm]{figures/logos/rice_logo_white.png}
+        \end{center}
+        \vskip2ex
+      \end{column}
+      \begin{column}{.02\paperwidth}
+      \end{column}
+    \end{columns}
+    \vskip2ex
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+    \rule{0pt}{3pt}
+  \end{beamercolorbox}
+}
+
+% Poster footline (uses \leftfoot, \centerfoot, \rightfoot from .tex)
+\setbeamertemplate{footline}{%
+  \leavevmode
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.25cm,dp=0cm]{upper separation line foot}\vbox{}\end{beamercolorbox}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm,dp=0.3cm,leftskip=1em,rightskip=1em]{author in head/foot}%
+    \usebeamerfont{footline}%
+    \leftfoot\hfill \centerfoot \hfill \rightfoot
+  \end{beamercolorbox}
+  \begin{beamercolorbox}[wd=\paperwidth,ht=0.2cm,dp=0cm]{lower separation line foot}\vbox{}\end{beamercolorbox}
+}
+
+% Poster block templates
+\setbeamertemplate{block begin}{%
+  \vskip.75ex%
+  \begin{beamercolorbox}[ht=3.5ex,dp=0.5ex,center,leftskip=-1em,colsep*=.75ex]{block title}%
+    \usebeamerfont*{block title}%
+    \vspace{-7pt}%
+    {\hspace{-21pt}\phantom{Gg}\insertblocktitle}%
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[leftskip=10pt,colsep*=.75ex,sep=0.5ex,vmode]{block body}%
+    \justifying%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}%
+\setbeamertemplate{block end}{%
+  \end{beamercolorbox}%
+}%
+
+% Poster itemize (triangle / blacktriangleright)
+\setbeamertemplate{itemize items}[triangle]
+\setbeamertemplate{itemize item}{\raisebox{0.12ex}{$\blacktriangleright$}\hskip0.1em}
+\setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\triangleright$}\hskip0.1em}
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+\fi
